@@ -1,0 +1,35 @@
+.stackable-grid-wrapper {
+    border-radius: .5rem;
+    padding: 3rem;
+    background-color: #262250;
+    border: 1px solid #652bb3;
+}
+
+.stackable-grid-three {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 0;
+    margin: -1rem;
+}
+
+.column-of-three {
+    width: 30%;
+    float: left;
+}
+
+@media (max-width: 850px) {
+    .column-of-three {
+        width: 100%;
+        display: block;
+    }
+
+    .column-of-three:not(:first-child) {
+        margin-top: 2rem;
+    }
+}
+
+.column-of-three:not(:last-child) {
+    margin-right: 5%;
+}
