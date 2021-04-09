@@ -4,19 +4,20 @@ import { useHistory } from "react-router";
 import "./AccountDetail.css";
 import { db, getTimeStamp } from "./firebase";
 import PhotoUploadWidget from "./PhotoUploadWidget";
+import { setLoading, setTab } from "./redux/App/app.actions";
+import { setUserInsight } from "./redux/Insight/insight.actions";
 
-function AccountDetail({ user, setActiveTab, userInsight, setUserInsight }) {
+function AccountDetail({ user, userInsight, SetUserInsight, SetLoading, SetTab }) {
     const history = useHistory();
     
     const [files, setFiles] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     const fullName = useRef();
     const insight = useRef();
     const rating = useRef();
 
     useEffect(() => {
-        setActiveTab("account-details");
+        SetTab("account-details");
         if (!user) {
             history.push("/register");
         }
@@ -24,7 +25,7 @@ function AccountDetail({ user, setActiveTab, userInsight, setUserInsight }) {
 
     const handleSubmitProfile = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        SetLoading(true);
         const newDisplayName = fullName.current.value;
 
         if(user.displayName !== newDisplayName) {
@@ -34,25 +35,26 @@ function AccountDetail({ user, setActiveTab, userInsight, setUserInsight }) {
             if(doc.exists) {
                 await db.collection("insights").doc(user?.uid).update({ name: newDisplayName});
             }            
-            setLoading(false);
+            SetLoading(false);
         }
     }
 
     const handleSubmitInsight = async (e) => {
         e.preventDefault();
-        setLoading(true);
-
+        SetLoading(true);
         if(insight.current.value !== "") {
             const ins = {
                 text: insight.current.value,
                 rating: rating.current.value,
                 date:  getTimeStamp(),
                 photo: user.photoURL,
-                name: user.displayName
+                name: user.displayName,
+                likes: [],
+                dislikes: []
             };
             await db.collection("insights").doc(user?.uid).set(ins);
-            setUserInsight({...ins, id: user?.uid});
-            setLoading(false);
+            SetUserInsight({...ins, id: user?.uid});
+            SetLoading(false);
         }
     }
 
@@ -83,10 +85,10 @@ function AccountDetail({ user, setActiveTab, userInsight, setUserInsight }) {
                                         <ul>
                                             <li>
                                                 <h4 style={{marginBottom: "1.5rem"}}>Rating</h4>
-                                                <input type="number" onChange={e=> setTwoNumberDecimal(e)} min="0" max="10" step="0.1" defaultValue="10.0" ref={rating} />
+                                                <input type="number" onChange={e=> setTwoNumberDecimal(e)} min="0" max="5" step="0.1" defaultValue="5.0" ref={rating} />
                                             </li>
                                             <li>
-                                                <textarea placeholder="Your Insight" ref={insight} required></textarea>
+                                                <textarea placeholder="Your Insight" ref={insight} required minLength="5"></textarea>
                                             </li>
                                             <li>
                                                 <button className="btn btn--pink">Share your insight</button>
@@ -102,7 +104,15 @@ function AccountDetail({ user, setActiveTab, userInsight, setUserInsight }) {
 const mapStateToProps = (state) => {
     return {
         user: state.userReducer.user,
+        userInsight: state.insightReducer.userInsight
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        SetLoading: (l) => dispatch(setLoading(l)),
+        SetTab: (tab) => dispatch(setTab(tab)),
+        SetUserInsight: (ins) => dispatch((setUserInsight(ins)))
     };
 };
 
-export default connect(mapStateToProps, null)(AccountDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountDetail);

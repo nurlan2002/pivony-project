@@ -1,65 +1,57 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { logoutUser } from "./redux/User/user.actions";
 import "./Sidebar.css";
 
-function Sidebar({activeTab, setActiveTab, user, LogoutUser, userInsight}) {
-    const history = useHistory();
+function Sidebar({tab, user, LogoutUser, userInsight}) {
 
     return (
         <nav className="menu" tabIndex="0">
             <div className="smartphone-menu-trigger"></div>
-            <div className="logo_wrapper">
-                <img
-                    className="logo"
-                    src="/assets/pivony_logo.png"
-                    alt="pivony logo"
-                />
-            </div>
+            <Link to="/">
+                <div className="logo_wrapper">
+                    <img
+                        className="logo"
+                        src="/assets/pivony_logo.png"
+                        alt="pivony logo"
+                    />
+                </div>
+            </Link>            
 
             <ul className="side-nav">
-                <li 
-                    className={"side-nav__item " + (activeTab === "" ? "side-nav__item--active" : "")} 
-                    onClick={() => {setActiveTab(""); history.push("/")}}>
-                    <a href="#" className="side-nav__link">
+                <li className={"side-nav__item " + (tab === "" ? "side-nav__item--active" : "")}>
+                    <Link to="/" className="side-nav__link">
                         <span>Insights</span>
-                    </a>
+                    </Link>
                 </li>
                 {
                     user 
-                        ?   <>
-                                <li 
-                                    className={"side-nav__item " + (activeTab === "account-details" ? "side-nav__item--active" : "")} 
-                                    onClick={() => {setActiveTab("account-details"); history.push("/account-details")}}>
-                                    <a href="#" className="side-nav__link">
-                                        <span>Account</span>
-                                    </a>
-                                </li>
-                                {
-                                    userInsight && <li 
-                                                        className={"side-nav__item " + (activeTab === "my-insight" ? "side-nav__item--active" : "")} 
-                                                        onClick={() => {setActiveTab("my-insight"); history.push("/my-insight")}}>
-                                                        <a href="#" className="side-nav__link">
-                                                            <span>My insight</span>
-                                                        </a>
-                                                    </li>
-                                }
-                                <li 
-                                    className={"side-nav__item"} 
-                                    onClick={() => {setActiveTab(""); history.push("/"); LogoutUser()}}>
-                                    <a href="#" className="side-nav__link">
-                                        <span>Log Out</span>
-                                    </a>
-                                </li> 
-                            </>
-                        :   <li 
-                                className={"side-nav__item " + (activeTab === "register" ? "side-nav__item--active" : "")} 
-                                onClick={() => {setActiveTab("register"); history.push("/register")}}>
-                                <a href="#" className="side-nav__link">
-                                    <span>Log In / Sign Up</span>
-                                </a>
+                    ?   <>
+                            <li className={"side-nav__item " + (tab === "account-details" ? "side-nav__item--active" : "")} >
+                                <Link to="/account-details" className="side-nav__link">
+                                    <span>Account</span>
+                                </Link>
                             </li>
+                            {
+                                userInsight && 
+                                <li className={"side-nav__item " + (tab === "my-insight" ? "side-nav__item--active" : "")} >
+                                    <Link to="/my-insight" className="side-nav__link">
+                                        <span>My insight</span>
+                                    </Link>
+                                </li>
+                            }
+                            <li className="side-nav__item" onClick={LogoutUser}>
+                                <Link to="/" className="side-nav__link">
+                                    <span>Log out</span>
+                                </Link>
+                            </li> 
+                        </>
+                    :   <li className={"side-nav__item " + (tab === "register" ? "side-nav__item--active" : "")} >
+                            <Link to="/register" className="side-nav__link">
+                                <span>Log In / Sign Up</span>
+                            </Link>
+                        </li>
                 }
             </ul>
         </nav>
@@ -68,7 +60,9 @@ function Sidebar({activeTab, setActiveTab, user, LogoutUser, userInsight}) {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        tab: state.appReducer.tab,
+        userInsight: state.insightReducer.userInsight
     };
 };
 

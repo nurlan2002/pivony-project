@@ -75,3 +75,13 @@
 .btn--pink::after {
 	background-color: #ce2c8a;
 }
+
+@media screen and (max-width: 400px) {
+    .header {
+		flex-direction: column;
+    }
+
+	.header .btn {
+		margin-top: 2rem;
+    }
+}

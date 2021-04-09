@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
@@ -10,11 +11,17 @@ function Header({userInsight}) {
             </div>
             <div className="header-right">
                 {
-                    userInsight ? <Link to="/my-insight" className="btn btn--pink" >Edit your insight</Link> : <Link to="/account-details" className="btn btn--pink">Add your insight</Link>
+                    userInsight ? <Link to="/my-insight" className="btn btn--pink btn--header" >Edit your insight</Link> : <Link to="/account-details" className="btn btn--pink">Add your insight</Link>
                 }
             </div>
         </header>
     );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        userInsight: state.insightReducer.userInsight
+    };
+};
+
+export default connect(mapStateToProps, null)(Header);

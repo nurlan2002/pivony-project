@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setSelectedInsight } from "./redux/Insight/insight.actions";
 import "./SmallCard.css";
 
-function SmallCard({ insight, setInsight, mine }) {
+function SmallCard({ insight, SetSelectedInsight, mine }) {
     const formatDate = () => {
         const dateStr = insight.date.toDate().toDateString();
         const dateSplit = dateStr.split(" ");
@@ -12,7 +14,7 @@ function SmallCard({ insight, setInsight, mine }) {
         <a
             href="/#popup"
             className="popup_link"
-            onClick={() => setInsight({ ...insight })}
+            onClick={() => SetSelectedInsight({ ...insight })}
         >
             <figure className="review" style={{ backgroundColor: mine && "#ce2c8a"}}>
                 <blockquote className="review__text">{insight.text}</blockquote>
@@ -33,4 +35,10 @@ function SmallCard({ insight, setInsight, mine }) {
     );
 }
 
-export default SmallCard;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        SetSelectedInsight: (ins) => dispatch(setSelectedInsight(ins))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(SmallCard);

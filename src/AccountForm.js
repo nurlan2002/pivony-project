@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
+import { setTab } from "./redux/App/app.actions";
 
-import { loginUser, signUpUser } from "./redux/User/user.actions";
+import { loginUser, signUpUser} from "./redux/User/user.actions";
 
-function AccountForm({LoginUser, SignUpUser, user, setActiveTab}) {
+function AccountForm({LoginUser, SignUpUser, user, SetTab}) {
     const history = useHistory();
 
     useEffect(() => {
-        setActiveTab("register");
+        SetTab("register");
         if(user) {
             history.push("/account-details");
         }
@@ -161,7 +162,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         SignUpUser: (email, password) => dispatch(signUpUser(email, password)),
-        LoginUser: (email, password) => dispatch(loginUser(email, password))
+        LoginUser: (email, password) => dispatch(loginUser(email, password)),
+        SetTab: (tab) => dispatch(setTab(tab))
     };
 };
 

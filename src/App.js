@@ -2,9 +2,8 @@ import "./App.css";
 import CardGrid from "./CardGrid";
 import ContentWrapper from "./ContentWrapper";
 import Header from "./Header";
-import Popup from "./Popup";
 import Sidebar from "./Sidebar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"; 
 import { useEffect, useState } from "react";
 import AccountForm from "./AccountForm";
 import { auth, db } from "./firebase";
@@ -12,10 +11,10 @@ import { connect } from "react-redux";
 import { setUser } from "./redux/User/user.actions";
 import AccountDetail from "./AccountDetail";
 import InsightDetails from "./InsightDetails";
+import Loader from "./Loader";
+import { setUserInsight } from "./redux/Insight/insight.actions";
 
-function App({ SetUser }) {
-    const [selectedInsight, setSelectedInsight] = useState(null);
-    const [activeTab, setActiveTab] = useState("");
+function App({ SetUser, SetUserInsight }) {
 
     const [userInsight, setUserInsight] = useState(null);
 
@@ -24,10 +23,10 @@ function App({ SetUser }) {
             if (authUser) {
                 SetUser(authUser);
                 db.collection("insights").doc(authUser.uid).get().then((doc) => {
-                    setUserInsight({...doc.data(), id: doc.id});
+                    SetUserInsight({...doc.data(), id: doc.id});
                 })
             } else {
-                setUserInsight(null);
+                SetUserInsight(null);
             }
         });
     }, []);
@@ -35,23 +34,23 @@ function App({ SetUser }) {
     return (
         <Router>
             <div className="App">
-                <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} userInsight={userInsight}/>
+                <Loader />
+                <Sidebar />
                 <main>
                     <ContentWrapper>
                         <Switch>
                             <Route path="/my-insight">
-                                <InsightDetails userInsight={userInsight} setUserInsight={setUserInsight} setActiveTab={setActiveTab}/>
+                                <InsightDetails />
                             </Route>
                             <Route path="/account-details">
-                                <AccountDetail setActiveTab={setActiveTab} userInsight={userInsight} setUserInsight={setUserInsight}/>
+                                <AccountDetail />
                             </Route>
                             <Route path="/register">
-                                <AccountForm setActiveTab={setActiveTab} />
+                                <AccountForm />
                             </Route>
                             <Route path="/">
-                                <Popup insight={selectedInsight} />
-                                <Header userInsight={userInsight} />
-                                <CardGrid setInsight={setSelectedInsight} userInsight={userInsight}/>
+                                <Header />
+                                <CardGrid />
                             </Route>
                         </Switch>
                     </ContentWrapper>
@@ -61,11 +60,10 @@ function App({ SetUser }) {
     );
 }
 
-// const mapStateToProps = (state) => { };
-
 const mapDispatchToProps = (dispatch) => {
     return {
         SetUser: (user) => dispatch(setUser(user)),
+        SetUserInsight: (ins) => dispatch((setUserInsight(ins)))
     };
 };
 

@@ -41,4 +41,4 @@ const getTimeStamp = () => {
     return firebase.firestore.FieldValue.serverTimestamp();
 };
 
-export { db, auth, uploadPhoto, getTimeStamp };
+export { firebaseApp, db, auth, uploadPhoto, getTimeStamp };

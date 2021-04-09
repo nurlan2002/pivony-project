@@ -1,27 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { db, getTimeStamp } from './firebase';
+import { setLoading, setTab } from './redux/App/app.actions';
+import { setUserInsight } from './redux/Insight/insight.actions';
 
-function InsightDetails({userInsight, user, setUserInsight, setActiveTab}) {
+function InsightDetails({userInsight, user, SetUserInsight, SetTab, SetLoading}) {
 
     const history = useHistory();
-
-    const [loading, setLoading] = useState(false);
 
     const insight = useRef();
     const rating = useRef();
 
     useEffect(() => {
-        setActiveTab("my-insight");
+        SetTab("my-insight");
         if (!user) {
             history.push("/register");
+        }
+        console.log(userInsight);
+        if (!userInsight) {
+            history.push("/account-details");
         }
     }, [user]);
 
     const handleSubmitInsight = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        SetLoading(true);
 
         if(insight.current.value !== "") {
             const newIns = {
@@ -30,8 +34,8 @@ function InsightDetails({userInsight, user, setUserInsight, setActiveTab}) {
                 date: getTimeStamp()
             };
             await db.collection("insights").doc(user?.uid).update(newIns);
-            setUserInsight({...newIns, id: user.uid});
-            setLoading(false);
+            SetUserInsight({...newIns, id: user.uid});
+            SetLoading(false);
         }
     }
 
@@ -40,11 +44,10 @@ function InsightDetails({userInsight, user, setUserInsight, setActiveTab}) {
     }
 
     const deleteInsight = async () => {
-        setLoading(true);
+        SetLoading(true);
         await db.collection("insights").doc(user?.uid).delete();
-        setLoading(false);
-        setUserInsight(null);
-        setActiveTab("");
+        SetLoading(false);
+        SetUserInsight(null);
         history.push("/");
     }
 
@@ -61,7 +64,7 @@ function InsightDetails({userInsight, user, setUserInsight, setActiveTab}) {
                         <textarea placeholder="Your Insight" defaultValue={userInsight?.text} ref={insight} required></textarea>
                     </li>
                     <li>
-                        <button className="btn btn--pink" style={{marginRight: "2rem"}}>Update your insight</button>
+                        <button type="submit" className="btn btn--pink" style={{marginRight: "2rem", marginBottom: "2rem"}}>Update your insight</button>
                         <button className="btn btn--purple" onClick={deleteInsight}>Delete your insight</button>
                     </li>
                 </ul>
@@ -73,11 +76,16 @@ function InsightDetails({userInsight, user, setUserInsight, setActiveTab}) {
 const mapStateToProps = (state) => {
     return {
         user: state.userReducer.user,
+        userInsight: state.insightReducer.userInsight
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return { };
+    return { 
+        SetLoading: (l) => dispatch(setLoading(l)),
+        SetTab: (tab) => dispatch(setTab(tab)),
+        SetUserInsight: (ins) => dispatch((setUserInsight(ins)))
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsightDetails);

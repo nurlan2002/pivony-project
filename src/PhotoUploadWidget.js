@@ -3,8 +3,10 @@ import PhotoWidgetCropper from "./PhotoWidgetCropper";
 import PhotoWidgetDropzone from "./PhotoWidgetDropzone";
 import "./PhotoUploadWidget.css";
 import { uploadPhoto } from "./firebase";
+import { setLoading } from "./redux/App/app.actions";
+import { connect } from "react-redux";
 
-function PhotoUploadWidget({ setFiles, files }) {
+function PhotoUploadWidget({ setFiles, files, SetLoading }) {
     const [cropper, setCropper] = useState();
 
     useEffect(() => {
@@ -13,17 +15,15 @@ function PhotoUploadWidget({ setFiles, files }) {
         };
     }, [files]);
 
-    const uploadPhotoToStorage = async (file) => {
-        await uploadPhoto(file);
-        setFiles([]);
-    };
-
     async function onCrop(e) {
         e.preventDefault();
         if (cropper) {
+            SetLoading(true);
             const dataURI = cropper.getCroppedCanvas().toDataURL("image/jpeg");
             const blob = await (await fetch(dataURI)).blob();
-            uploadPhotoToStorage(blob);
+            await uploadPhoto(blob);
+            setFiles([]);
+            SetLoading(false);
         }
     }
 
@@ -54,8 +54,8 @@ function PhotoUploadWidget({ setFiles, files }) {
                                 style={{ minHeight: 200, overflow: "hidden" }}
                             />
                             <div style={{marginTop: "2rem"}}>
-                                <button class="btn btn--purple btn--mini" onClick={(e) => onCrop(e)}><i class="fa fa-check" aria-hidden="true"></i></button>
-                                <button class="btn btn--purple btn--mini btn--inverted" onClick={() => setFiles([])}><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <button className="btn btn--purple btn--mini" onClick={(e) => onCrop(e)}><i className="fa fa-check" aria-hidden="true"></i></button>
+                                <button className="btn btn--purple btn--mini btn--inverted" onClick={() => setFiles([])}><i className="fa fa-times" aria-hidden="true"></i></button>
                             </div>
                         </>
                     )}
@@ -65,4 +65,10 @@ function PhotoUploadWidget({ setFiles, files }) {
     );
 }
 
-export default PhotoUploadWidget;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        SetLoading: (l) => dispatch(setLoading(l))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(PhotoUploadWidget);
