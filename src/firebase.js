@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCYtvge85Vkv9LaFXaOR0RtldxcnnwGQ4Y",
@@ -33,15 +33,42 @@ const uploadPhoto = async (file) => {
     const doc = await db.collection("insights").doc(uid).get();
 
     if (doc.exists) {
-        await db
-            .collection("insights")
-            .doc(uid)
-            .update({ photo: url });
+        await db.collection("insights").doc(uid).update({ photo: url });
     }
+};
+
+const update = async (id, mode) => {
+    const user = auth.currentUser;
+    let obj;
+    switch (mode) {
+        case "like":
+            obj = {
+                likes: firebase.firestore.FieldValue.arrayUnion(user.uid),
+                dislikes: firebase.firestore.FieldValue.arrayRemove(user.uid)
+            };
+            break;
+        case "dislike":
+            obj = {
+                likes: firebase.firestore.FieldValue.arrayRemove(user.uid),
+                dislikes: firebase.firestore.FieldValue.arrayUnion(user.uid),
+            };
+            break;
+        case "reset":
+            obj = {
+                likes: firebase.firestore.FieldValue.arrayRemove(user.uid),
+                dislikes: firebase.firestore.FieldValue.arrayRemove(user.uid)
+            };
+            break;
+
+        default:
+            obj = {};
+            break;
+    }
+    await db.collection("insights").doc(id).update(obj);
 };
 
 const getTimeStamp = () => {
     return firebase.firestore.FieldValue.serverTimestamp();
 };
 
-export { firebaseApp, db, auth, uploadPhoto, getTimeStamp };
+export { firebaseApp, db, auth, uploadPhoto, getTimeStamp, update };

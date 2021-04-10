@@ -9,7 +9,7 @@ import Popup from "./Popup";
 function CardGrid({ userInsight, SetLoading, SetTab }) {
     const [insights, setInsights] = useState([]);
 
-    useEffect(async () => {
+    useEffect(() => {
         SetTab("");
         SetLoading(true);
 

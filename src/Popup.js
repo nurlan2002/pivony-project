@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { db } from "./firebase";
+import { db, update } from "./firebase";
 import { setLoading } from "./redux/App/app.actions";
-import firebase from "firebase";
 import "./Popup.css";
 import { setSelectedInsight } from "./redux/Insight/insight.actions";
 
@@ -25,36 +24,11 @@ function Popup({ selectedInsight : insight, user, SetLoading, SetSelectedInsight
         return "";
     };
 
-    const newInsight = async () => {
+    const updateInsight = async (obj) => {
+        SetLoading(true);
+        await update(insight.id, obj);
         const newIns = await db.collection("insights").doc(insight.id).get();
         SetSelectedInsight({...newIns.data(), id: newIns.id});
-    }
-
-    const noButton = async () => {
-        SetLoading(true);
-        await db.collection("insights").doc(insight.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(user.uid),
-            dislikes: firebase.firestore.FieldValue.arrayUnion(user.uid)
-        });
-        newInsight();        
-    }
-
-    const yesButton = async () => {
-        SetLoading(true);
-        await db.collection("insights").doc(insight.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(user.uid),
-            dislikes: firebase.firestore.FieldValue.arrayRemove(user.uid)
-        });
-        newInsight();         
-    }
-
-    const resetButton = async () => {
-        SetLoading(true);
-        await db.collection("insights").doc(insight.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(user.uid),
-            dislikes: firebase.firestore.FieldValue.arrayRemove(user.uid)
-        });
-        newInsight();
     }
 
     return (
@@ -110,15 +84,15 @@ function Popup({ selectedInsight : insight, user, SetLoading, SetSelectedInsight
                         user && insight?.id !== user.uid && 
                         <>
                             <p className="popup__yesnotext">Was this insight helpful?</p>
-                            <button className="btn btn--purple btn--mini" disabled={insight?.likes.includes(user?.uid)} onClick={yesButton}>
+                            <button className="btn btn--purple btn--mini" disabled={insight?.likes.includes(user?.uid)} onClick={() => updateInsight("like")}>
                             <i className="fa fa-thumbs-up"></i>
                             </button>
-                            <button className="btn btn--purple btn--mini" disabled={insight?.dislikes.includes(user?.uid)} onClick={noButton}>
+                            <button className="btn btn--purple btn--mini" disabled={insight?.dislikes.includes(user?.uid)} onClick={() => updateInsight("dislike")}>
                             <i className="fa fa-thumbs-down"></i>
                             </button>
                             {
                                 (insight?.likes.includes(user?.uid) || insight?.dislikes.includes(user?.uid)) && 
-                                <button className="btn btn--purple btn--mini btn--inverted" onClick={resetButton}>
+                                <button className="btn btn--purple btn--mini btn--inverted" onClick={() => updateInsight("reset")}>
                                     Reset
                                 </button>
                             }

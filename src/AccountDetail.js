@@ -5,7 +5,6 @@ import "./AccountDetail.css";
 import { db } from "./firebase";
 import PhotoUploadWidget from "./PhotoUploadWidget";
 import { setLoading, setTab } from "./redux/App/app.actions";
-import { setUserInsight } from "./redux/Insight/insight.actions";
 
 function AccountDetail({ user, SetLoading, SetTab }) {
     const history = useHistory();
