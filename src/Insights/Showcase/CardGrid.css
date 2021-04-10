@@ -1,0 +1,9 @@
+.grid {
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+    grid-gap: 2rem;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+}

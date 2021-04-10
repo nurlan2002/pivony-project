@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setSelectedInsight } from "./redux/Insight/insight.actions";
+import { setSelectedInsight } from "../../redux/Insight/insight.actions";
 import "./SmallCard.css";
 
 function SmallCard({ insight, SetSelectedInsight, mine }) {

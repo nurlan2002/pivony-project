@@ -1,0 +1,98 @@
+.my-form {
+    font-size: 1.6rem;
+    margin-top: 4rem;
+    max-width: 100rem;
+}
+
+.my-form ul {
+    list-style: none;
+}
+
+.my-form ul li {
+    margin-bottom: 2rem;
+}
+
+.my-form input,
+.my-form textarea {
+    width: 100%;
+    font: inherit;
+    line-height: 1.5;
+    padding: 1.5rem 1rem;
+    outline: none;
+    border: 1px solid var(--purple);
+    border-radius: 0.5rem;
+    color: var(--grey);
+    background: var(--purple-dark);
+    -webkit-transition: background-color 0.3s
+            cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        -webkit-transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+    transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        -webkit-transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+    -o-transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+    transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+    transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        -webkit-transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+}
+
+.my-form input {
+    width: 50%;
+}
+
+.my-form textarea {
+    height: 17rem;
+}
+
+.my-form ::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+.my-form ::-moz-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+.my-form :-ms-input-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+.my-form ::-ms-input-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+.my-form ::placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+.my-form input:focus,
+.my-form textarea:focus {
+    background: var(--purple);
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+.my-form *:required {
+    background-repeat: no-repeat;
+    background-position: center right 1.2rem;
+    background-size: 1.5rem 1.5rem;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/asterisk.svg);
+}
+
+.heading-tertiary {
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+.heading-secondary {
+    margin-top: 4rem;
+    font-size: 2rem;
+    font-weight: 400;
+}

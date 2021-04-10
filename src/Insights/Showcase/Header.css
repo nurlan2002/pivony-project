@@ -1,0 +1,105 @@
+.header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 4rem;
+}
+
+.header-right {
+    margin-right: 2rem;
+	margin-top: 0.25rem;
+}
+
+.header-primary {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #ececec;
+}
+
+.btn, .btn:link, .btn:visited {
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 1.5rem 4rem;
+	display: inline-block;
+	border-radius: 10rem;
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+	position: relative;
+	font-size: 1.6rem;
+	border: none;
+	cursor: pointer;
+}
+
+.btn:hover {
+	-webkit-transform: translateY(-3px);
+	    -ms-transform: translateY(-3px);
+	        transform: translateY(-3px);
+	-webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+	        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover::after {
+	-webkit-transform: scaleX(1.4) scaleY(1.6);
+	    -ms-transform: scaleX(1.4) scaleY(1.6);
+	        transform: scaleX(1.4) scaleY(1.6);
+	opacity: 0;
+}
+
+.btn:active, .btn:focus {
+	outline: none;
+	-webkit-transform: translateY(-1px);
+	    -ms-transform: translateY(-1px);
+	        transform: translateY(-1px);
+	-webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn::after {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	border-radius: 10rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+}
+
+.btn--purple {
+	background-color: var(--purple);
+	color: #ececec;
+}
+
+.btn--purple::after {
+	background-color: var(--purple);
+}
+
+.btn--pink {
+	background-color: var(--pink);
+	color: #fff;
+}
+
+.btn--pink::after {
+	background-color: var(--pink);
+}
+
+@media screen and (max-width: 40em) {
+    .header {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+    }
+
+	.header .btn {
+		margin-top: 2rem;
+    }
+}

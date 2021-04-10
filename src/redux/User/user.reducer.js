@@ -2,13 +2,10 @@ import {
     SET_USER,
     LOGOUT_PENDING,
     LOGOUT_SUCCESS,
-    LOGOUT_FAILED,
     LOGIN_PENDING,
     LOGIN_SUCCESS,
-    LOGIN_FAILED,
     SIGNUP_PENDING,
     SIGNUP_SUCCESS,
-    SIGNUP_FAILED,
 } from "./user.types";
 
 const INITIAL_STATE = {
@@ -38,13 +35,6 @@ const userReducer = (state = INITIAL_STATE, action = {}) => {
                 isPending: false,
             };
 
-        case LOGIN_FAILED:
-            return {
-                ...state,
-                error: action.payload,
-                isPending: false,
-            };
-
         case SIGNUP_PENDING:
             return {
                 ...state,
@@ -58,13 +48,6 @@ const userReducer = (state = INITIAL_STATE, action = {}) => {
                 isPending: false,
             };
 
-        case SIGNUP_FAILED:
-            return {
-                ...state,
-                error: action.payload,
-                isPending: false,
-            };
-
         case LOGOUT_PENDING:
             return {
                 ...state,
@@ -75,13 +58,6 @@ const userReducer = (state = INITIAL_STATE, action = {}) => {
             return {
                 ...state,
                 user: null,
-                isPending: false,
-            };
-
-        case LOGOUT_FAILED:
-            return {
-                ...state,
-                error: action.payload,
                 isPending: false,
             };
 

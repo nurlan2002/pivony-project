@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
-import { db, getTimeStamp } from './firebase';
-import { setLoading, setTab } from './redux/App/app.actions';
-import { setUserInsight } from './redux/Insight/insight.actions';
+import { db, getTimeStamp } from '../../firebase';
+import { setLoading, setTab } from '../../redux/App/app.actions';
+import { setUserInsight } from '../../redux/Insight/insight.actions';
 
 function InsightDetails({userInsight, user, SetUserInsight, SetTab, SetLoading}) {
 

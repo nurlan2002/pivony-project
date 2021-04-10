@@ -4,14 +4,12 @@ import {
     SET_USER,
     LOGOUT_PENDING,
     LOGOUT_SUCCESS,
-    LOGOUT_FAILED,
     LOGIN_PENDING,
     LOGIN_SUCCESS,
-    LOGIN_FAILED,
     SIGNUP_PENDING,
     SIGNUP_SUCCESS,
-    SIGNUP_FAILED,
 } from "./user.types";
+import { toast } from "react-toastify";
 
 export const setUser = (user) => {
     return {
@@ -27,13 +25,22 @@ export const signUpUser = (email, password) => (dispatch) => {
         .then(async (userCredential) => {
             await userCredential.user.updateProfile({
                 displayName: "Anonymus",
-                photoURL: "https://firebasestorage.googleapis.com/v0/b/pivony-project.appspot.com/o/avatar-1577909.svg?alt=media&token=b6a86346-39cd-4a57-b117-844ec31494c9",
+                photoURL:
+                    "https://firebasestorage.googleapis.com/v0/b/pivony-project.appspot.com/o/avatar-1577909.svg?alt=media&token=b6a86346-39cd-4a57-b117-844ec31494c9",
             });
             dispatch({ type: SIGNUP_SUCCESS, payload: userCredential.user });
             dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((error) => {
-            dispatch({ type: SIGNUP_FAILED, payload: error.message });
+            toast.error(error.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             dispatch({ type: SET_LOADING, payload: false });
         });
 };
@@ -47,7 +54,15 @@ export const logoutUser = () => (dispatch) => {
             dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((error) => {
-            dispatch({ type: LOGOUT_FAILED, payload: error.message });
+            toast.error(error.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             dispatch({ type: SET_LOADING, payload: false });
         });
 };
@@ -61,7 +76,15 @@ export const loginUser = (email, password) => (dispatch) => {
             dispatch({ type: SET_LOADING, payload: false });
         })
         .catch((error) => {
-            dispatch({ type: LOGIN_FAILED, payload: error.message });
+            toast.error(error.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             dispatch({ type: SET_LOADING, payload: false });
         });
 };

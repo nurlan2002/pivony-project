@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import PhotoWidgetCropper from "./PhotoWidgetCropper";
 import PhotoWidgetDropzone from "./PhotoWidgetDropzone";
 import "./PhotoUploadWidget.css";
-import { uploadPhoto } from "./firebase";
-import { setLoading } from "./redux/App/app.actions";
+import { uploadPhoto } from "../../firebase";
+import { setLoading } from "../../redux/App/app.actions";
 import { connect } from "react-redux";
 
 function PhotoUploadWidget({ setFiles, files, SetLoading }) {

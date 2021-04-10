@@ -2,3 +2,11 @@ main {
     position: relative;
     height: 100vh;
 }
+
+:root {
+    --white: #fff;
+    --grey: #eee;
+    --pink: #ce2c8a;
+    --purple: #652bb3;
+    --purple-dark: #262250;
+}

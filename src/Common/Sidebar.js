@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logoutUser } from "./redux/User/user.actions";
+import { logoutUser } from "../redux/User/user.actions";
 import "./Sidebar.css";
 
 function Sidebar({tab, user, LogoutUser, userInsight}) {

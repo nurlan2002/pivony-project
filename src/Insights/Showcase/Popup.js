@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { db, update } from "./firebase";
-import { setLoading } from "./redux/App/app.actions";
+import { db, update } from "../../firebase";
+import { setLoading } from "../../redux/App/app.actions";
+import { setSelectedInsight } from "../../redux/Insight/insight.actions";
 import "./Popup.css";
-import { setSelectedInsight } from "./redux/Insight/insight.actions";
 
 function Popup({ selectedInsight : insight, user, SetLoading, SetSelectedInsight }) {
 

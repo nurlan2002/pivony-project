@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./CardGrid.css";
 import SmallCard from "./SmallCard";
-import { db } from "./firebase";
+import { db } from "../../firebase";
 import { connect } from "react-redux";
-import { setLoading, setTab } from "./redux/App/app.actions";
+import { setLoading, setTab } from "../../redux/App/app.actions";
 import Popup from "./Popup";
 
 function CardGrid({ userInsight, SetLoading, SetTab }) {

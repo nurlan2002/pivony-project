@@ -1,0 +1,429 @@
+.forms-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.forms {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+
+.form-wrapper {
+    -webkit-animation: hideLayer 0.3s ease-out forwards;
+            animation: hideLayer 0.3s ease-out forwards;
+}
+
+.form-wrapper.is-active {
+    -webkit-animation: showLayer 0.3s ease-in forwards;
+            animation: showLayer 0.3s ease-in forwards;
+}
+
+@-webkit-keyframes showLayer {
+    50% {
+        z-index: 1;
+    }
+    100% {
+        z-index: 1;
+    }
+}
+
+@keyframes showLayer {
+    50% {
+        z-index: 1;
+    }
+    100% {
+        z-index: 1;
+    }
+}
+
+@-webkit-keyframes hideLayer {
+    0% {
+        z-index: 1;
+    }
+    49.999% {
+        z-index: 1;
+    }
+}
+
+@keyframes hideLayer {
+    0% {
+        z-index: 1;
+    }
+    49.999% {
+        z-index: 1;
+    }
+}
+
+.switcher {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-size: 1.6rem;
+    letter-spacing: 0..5rem;
+    color: var(--grey);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.form-wrapper.is-active .switcher-login {
+    color: var(--pink);
+    -webkit-transform: translateX(9rem);
+        -ms-transform: translateX(9rem);
+            transform: translateX(9rem);
+}
+
+.form-wrapper.is-active .switcher-signup {
+    color: var(--pink);
+    -webkit-transform: translateX(-9rem);
+        -ms-transform: translateX(-9rem);
+            transform: translateX(-9rem);
+}
+
+.underline {
+    position: absolute;
+    bottom: -.5rem;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    width: 100%;
+    height: 2px;
+}
+
+.underline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: inherit;
+    display: block;
+    width: inherit;
+    height: inherit;
+    background-color: currentColor;
+    -webkit-transition: -webkit-transform 0.2s ease-out;
+    transition: -webkit-transform 0.2s ease-out;
+    -o-transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+
+.switcher-login .underline::before {
+    -webkit-transform: translateX(101%);
+        -ms-transform: translateX(101%);
+            transform: translateX(101%);
+}
+
+.switcher-signup .underline::before {
+    -webkit-transform: translateX(-101%);
+        -ms-transform: translateX(-101%);
+            transform: translateX(-101%);
+}
+
+.form-wrapper.is-active .underline::before {
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+}
+
+.form {
+    overflow: hidden;
+    min-width: 26rem;
+    margin-top: 5rem;
+    padding: 3rem 2.5rem;
+    border-radius: .5rem;
+    -webkit-transform-origin: top;
+        -ms-transform-origin: top;
+            transform-origin: top;
+}
+
+.form-login {
+    -webkit-animation: hideLogin 0.3s ease-out forwards;
+            animation: hideLogin 0.3s ease-out forwards;
+}
+
+.form-wrapper.is-active .form-login {
+    -webkit-animation: showLogin 0.3s ease-in forwards;
+            animation: showLogin 0.3s ease-in forwards;
+}
+
+@-webkit-keyframes showLogin {
+    0% {
+        background: #d7e7f1;
+        -webkit-transform: translate(40%, 1rem);
+                transform: translate(40%, 1rem);
+    }
+    50% {
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        background-color: #fff;
+        -webkit-transform: translate(35%, -2rem);
+                transform: translate(35%, -2rem);
+    }
+}
+
+@keyframes showLogin {
+    0% {
+        background: #d7e7f1;
+        -webkit-transform: translate(40%, 1rem);
+                transform: translate(40%, 1rem);
+    }
+    50% {
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        background-color: #fff;
+        -webkit-transform: translate(35%, -2rem);
+                transform: translate(35%, -2rem);
+    }
+}
+
+@-webkit-keyframes hideLogin {
+    0% {
+        background-color: #fff;
+        -webkit-transform: translate(35%, -2rem);
+                transform: translate(35%, -2rem);
+    }
+    50% {
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        background: #d7e7f1;
+        -webkit-transform: translate(40%, 1rem);
+                transform: translate(40%, 1rem);
+    }
+}
+
+@keyframes hideLogin {
+    0% {
+        background-color: #fff;
+        -webkit-transform: translate(35%, -2rem);
+                transform: translate(35%, -2rem);
+    }
+    50% {
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        background: #d7e7f1;
+        -webkit-transform: translate(40%, 1rem);
+                transform: translate(40%, 1rem);
+    }
+}
+
+.form-signup {
+    -webkit-animation: hideSignup 0.3s ease-out forwards;
+            animation: hideSignup 0.3s ease-out forwards;
+}
+
+.form-signup fieldset,
+.form-login fieldset {
+    visibility: hidden;
+}
+
+.form-wrapper.is-active .form-signup {
+    -webkit-animation: showSignup 0.3s ease-in forwards;
+            animation: showSignup 0.3s ease-in forwards;
+}
+
+.form-wrapper.is-active .form-signup fieldset,
+.form-wrapper.is-active .form-login fieldset {
+    visibility: visible;
+}
+
+@-webkit-keyframes showSignup {
+    0% {
+        background: #d7e7f1;
+        -webkit-transform: translate(-40%, 1rem) scaleY(0.8);
+                transform: translate(-40%, 1rem) scaleY(0.8);
+    }
+    50% {
+        -webkit-transform: translate(0, 0) scaleY(0.8);
+                transform: translate(0, 0) scaleY(0.8);
+    }
+    100% {
+        background-color: #fff;
+        -webkit-transform: translate(-35%, -2rem) scaleY(1);
+                transform: translate(-35%, -2rem) scaleY(1);
+    }
+}
+
+@keyframes showSignup {
+    0% {
+        background: #d7e7f1;
+        -webkit-transform: translate(-40%, 1rem) scaleY(0.8);
+                transform: translate(-40%, 1rem) scaleY(0.8);
+    }
+    50% {
+        -webkit-transform: translate(0, 0) scaleY(0.8);
+                transform: translate(0, 0) scaleY(0.8);
+    }
+    100% {
+        background-color: #fff;
+        -webkit-transform: translate(-35%, -2rem) scaleY(1);
+                transform: translate(-35%, -2rem) scaleY(1);
+    }
+}
+
+@-webkit-keyframes hideSignup {
+    0% {
+        background-color: #fff;
+        -webkit-transform: translate(-35%, -2rem) scaleY(1);
+                transform: translate(-35%, -2rem) scaleY(1);
+    }
+    50% {
+        -webkit-transform: translate(0, 0) scaleY(0.8);
+                transform: translate(0, 0) scaleY(0.8);
+    }
+    100% {
+        background: #d7e7f1;
+        -webkit-transform: translate(-40%, 1rem) scaleY(0.8);
+                transform: translate(-40%, 1rem) scaleY(0.8);
+    }
+}
+
+@keyframes hideSignup {
+    0% {
+        background-color: #fff;
+        -webkit-transform: translate(-35%, -2rem) scaleY(1);
+                transform: translate(-35%, -2rem) scaleY(1);
+    }
+    50% {
+        -webkit-transform: translate(0, 0) scaleY(0.8);
+                transform: translate(0, 0) scaleY(0.8);
+    }
+    100% {
+        background: #d7e7f1;
+        -webkit-transform: translate(-40%, 1rem) scaleY(0.8);
+                transform: translate(-40%, 1rem) scaleY(0.8);
+    }
+}
+
+.form fieldset {
+    position: relative;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.form-login fieldset {
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+
+.form-signup fieldset {
+    -webkit-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+            transform: translateX(50%);
+}
+
+.form-wrapper.is-active fieldset {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-transition: opacity 0.4s ease-in, -webkit-transform 0.35s ease-in;
+    transition: opacity 0.4s ease-in, -webkit-transform 0.35s ease-in;
+    -o-transition: opacity 0.4s ease-in, transform 0.35s ease-in;
+    transition: opacity 0.4s ease-in, transform 0.35s ease-in;
+    transition: opacity 0.4s ease-in, transform 0.35s ease-in, -webkit-transform 0.35s ease-in;
+}
+
+.form legend {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+}
+
+.input-block {
+    margin-bottom: 2rem;
+}
+
+.input-block label {
+    font-size: 1.4rem;
+    color: #a1b4b4;
+}
+
+.input-block input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 rem 100rem #fff inset;
+            box-shadow: 0 0 rem 100rem #fff inset;
+}
+
+.input-block input {
+    display: block;
+    width: 100%;
+    margin-top: .8rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 4rem;
+    border: 1px solid #cddbef;
+    border-radius: 2px;
+    outline: none;
+}
+
+.input-block input:focus {
+    border: 1px solid var(--purple);
+}
+
+.form [type="submit"] {
+    opacity: 0;
+    display: block;
+    min-width: 12rem;
+    margin: 1.5rem auto 1rem;
+    font-size: 1.8rem;
+    border-radius: 2.5rem;
+    border: none;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.form-wrapper.is-active .form [type="submit"] {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-transition: all 0.4s ease-in;
+    -o-transition: all 0.4s ease-in;
+    transition: all 0.4s ease-in;
+}
+
+.Toastify {
+    font-size: 1.6rem ;
+}
