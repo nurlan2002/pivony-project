@@ -34,10 +34,15 @@ function Sidebar({tab, user, LogoutUser, userInsight}) {
                                 </Link>
                             </li>
                             {
-                                userInsight && 
+                                userInsight ?
                                 <li className={"side-nav__item " + (tab === "my-insight" ? "side-nav__item--active" : "")} >
                                     <Link to="/my-insight" className="side-nav__link">
                                         <span>My insight</span>
+                                    </Link>
+                                </li> :
+                                <li className={"side-nav__item " + (tab === "create-insight" ? "side-nav__item--active" : "")} >
+                                    <Link to="/create-insight" className="side-nav__link">
+                                        <span>Create insight</span>
                                     </Link>
                                 </li>
                             }

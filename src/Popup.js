@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { db } from "./firebase";
 import { setLoading } from "./redux/App/app.actions";
@@ -7,6 +7,14 @@ import "./Popup.css";
 import { setSelectedInsight } from "./redux/Insight/insight.actions";
 
 function Popup({ selectedInsight : insight, user, SetLoading, SetSelectedInsight }) {
+
+    useEffect(() => {
+        document.getElementById("popup").addEventListener("click", (e) => {
+            if(!e.target.closest("#popup__content")) {
+                document.location.href = "#insights";
+            }
+        })
+    }, [])
 
     const formatDate = () => {
         if (insight) {
@@ -50,8 +58,8 @@ function Popup({ selectedInsight : insight, user, SetLoading, SetSelectedInsight
     }
 
     return (
-        <div className="popup" id="popup">
-            <div className="popup__content">
+        <div className="popup show" id="popup">
+            <div className="popup__content" id="popup__content">
                 <div className="popup__left">
                     <img
                         src={insight?.photo}

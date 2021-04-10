@@ -130,17 +130,6 @@ function AccountForm({LoginUser, SignUpUser, user, SetTab}) {
                                         autoComplete="true"
                                     />
                                 </div>
-                                <div className="input-block">
-                                    <label htmlFor="signup-password-confirm">
-                                        Confirm password
-                                    </label>
-                                    <input
-                                        id="signup-password-confirm"
-                                        type="password"
-                                        required
-                                        autoComplete="true"
-                                    />
-                                </div>
                             </fieldset>
                             <button type="submit" className="btn btn--purple">
                                 Sign Up

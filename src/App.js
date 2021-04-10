@@ -4,7 +4,7 @@ import ContentWrapper from "./ContentWrapper";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"; 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AccountForm from "./AccountForm";
 import { auth, db } from "./firebase";
 import { connect } from "react-redux";
@@ -13,17 +13,20 @@ import AccountDetail from "./AccountDetail";
 import InsightDetails from "./InsightDetails";
 import Loader from "./Loader";
 import { setUserInsight } from "./redux/Insight/insight.actions";
+import CreateInsight from "./CreateInsight";
 
 function App({ SetUser, SetUserInsight }) {
-
-    const [userInsight, setUserInsight] = useState(null);
 
     useEffect(() => {
         auth.onAuthStateChanged((authUser) => {
             if (authUser) {
                 SetUser(authUser);
                 db.collection("insights").doc(authUser.uid).get().then((doc) => {
-                    SetUserInsight({...doc.data(), id: doc.id});
+                    if(doc.exists) {
+                        SetUserInsight({...doc.data(), id: doc.id});
+                    } else {
+                        SetUserInsight(null);
+                    }                    
                 })
             } else {
                 SetUserInsight(null);
@@ -39,6 +42,9 @@ function App({ SetUser, SetUserInsight }) {
                 <main>
                     <ContentWrapper>
                         <Switch>
+                            <Route path="/create-insight">
+                                <CreateInsight />
+                            </Route>
                             <Route path="/my-insight">
                                 <InsightDetails />
                             </Route>
