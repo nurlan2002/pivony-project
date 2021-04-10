@@ -10,11 +10,6 @@
     visibility: hidden;
     transition: all 0.3s;
     color: #777;
-    display: none;
-}
-
-.popup.show {
-    display: block;
 }
 
 .popup *::selection {
@@ -206,8 +201,8 @@
         margin-bottom: 2rem;
     }
 
-    .popup__right .btn {
-        margin-bottom: 5rem;
+    .popup__right {
+        padding-bottom: 5rem;
     }
 }
 
@@ -226,6 +221,7 @@
     .popup__right {
         width: 100%;
         padding: 0 5rem;
+        padding-bottom: 5rem;
     }
 
     .popup__rating {
@@ -258,6 +254,7 @@
 
     .popup__right {
         padding: 0 3rem;
+        padding-bottom: 3rem;
     }
 
     .popup__user-date {

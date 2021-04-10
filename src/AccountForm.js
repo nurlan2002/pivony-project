@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import { setTab } from "./redux/App/app.actions";
-
 import { loginUser, signUpUser} from "./redux/User/user.actions";
 
 function AccountForm({LoginUser, SignUpUser, user, SetTab}) {

@@ -18,13 +18,13 @@ html {
     font-size: 62.5%;
 }
 
-html {
-    font-size: 62.5%;
-}
-
 @media screen and (max-width: 900px) {
     html {
         font-size: 56.25%;
+    }
+
+    body {
+        padding-left: 0;
     }
 }
 
@@ -34,11 +34,6 @@ html {
     }
 }
 
-@media screen and (max-width: 900px) {
-    body {
-        padding-left: 0;
-    }
-}
 
 ::selection {
     background-color: #fff;

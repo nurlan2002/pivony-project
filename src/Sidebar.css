@@ -77,7 +77,6 @@
 
     .menu ul li {
         padding: 1rem 1rem 1rem 3rem;
-        font-size: 1.2rem;
     }
 
     .menu:focus {
@@ -87,6 +86,12 @@
 
     .menu:focus .smartphone-menu-trigger {
         pointer-events: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .menu ul li {
+        font-size: 2rem;
     }
 }
 

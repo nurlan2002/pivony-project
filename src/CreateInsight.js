@@ -13,8 +13,11 @@ function CreateInsight({user, userInsight, SetUserInsight, SetTab, SetLoading}) 
 
     useEffect(() => {
         SetTab("create-insight");
+        if(!user) {
+            history.push("/register");
+        }
         if(userInsight) {
-            history.push("my-insight");
+            history.push("/my-insight");
         }
     }, []);
 
