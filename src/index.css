@@ -19,7 +19,7 @@ html {
     font-size: 62.5%;
 }
 
-@media screen and (max-width: 90em) {
+@media screen and (max-width: 900px) {
     html {
         font-size: 56.25%;
     }
@@ -29,13 +29,13 @@ html {
     }
 }
 
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 400px) {
     html {
         font-size: 50%;
     }
 }
 
-@media screen and (min-width: 120em) {
+@media screen and (min-width: 1500px) {
     html {
         font-size: 75%;
     }

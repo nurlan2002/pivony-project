@@ -27,7 +27,7 @@
     float: left;
 }
 
-@media (max-width: 85em) {
+@media (max-width: 850px) {
     .column-of-three {
         width: 100%;
         display: block;

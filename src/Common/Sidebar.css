@@ -43,7 +43,7 @@
     outline: none;
 }
 
-@media screen and (max-width: 90em) {
+@media screen and (max-width: 900px) {
     .menu {
         width: 23rem;
         -webkit-box-shadow: 0 0 0 100rem rgba(0, 0, 0, 0);
@@ -99,7 +99,7 @@
     }
 }
 
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 400px) {
     .menu ul li {
         font-size: 2rem;
     }
