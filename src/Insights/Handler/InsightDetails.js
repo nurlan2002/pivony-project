@@ -58,7 +58,7 @@ function InsightDetails({userInsight, user, SetUserInsight, SetTab, SetLoading})
                 <ul>
                     <li>
                         <h4 style={{marginBottom: "1.5rem"}}>Rating</h4>
-                        <input type="number" onChange={e=> setTwoNumberDecimal(e)} min="0" max="10" step="0.1" defaultValue={userInsight?.rating} ref={rating} />
+                        <input type="number" onChange={e=> setTwoNumberDecimal(e)} min="0" max="5" step="0.1" defaultValue={userInsight?.rating} ref={rating} />
                     </li>
                     <li>
                         <textarea placeholder="Your Insight" defaultValue={userInsight?.text} ref={insight} required></textarea>

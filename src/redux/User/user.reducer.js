@@ -1,17 +1,12 @@
 import {
     SET_USER,
-    LOGOUT_PENDING,
-    LOGOUT_SUCCESS,
-    LOGIN_PENDING,
-    LOGIN_SUCCESS,
-    SIGNUP_PENDING,
-    SIGNUP_SUCCESS,
+    LOGOUT,
+    LOGIN,
+    SIGNUP,
 } from "./user.types";
 
 const INITIAL_STATE = {
-    user: null,
-    isPending: false,
-    error: null,
+    user: null
 };
 
 const userReducer = (state = INITIAL_STATE, action = {}) => {
@@ -22,43 +17,22 @@ const userReducer = (state = INITIAL_STATE, action = {}) => {
                 user: action.payload,
             };
 
-        case LOGIN_PENDING:
+        case LOGIN:
             return {
                 ...state,
-                isPending: true,
+                user: action.payload
             };
 
-        case LOGIN_SUCCESS:
+        case SIGNUP:
             return {
                 ...state,
-                user: action.payload,
-                isPending: false,
+                user: action.payload
             };
 
-        case SIGNUP_PENDING:
+        case LOGOUT:
             return {
                 ...state,
-                isPending: true,
-            };
-
-        case SIGNUP_SUCCESS:
-            return {
-                ...state,
-                user: action.payload,
-                isPending: false,
-            };
-
-        case LOGOUT_PENDING:
-            return {
-                ...state,
-                isPending: true,
-            };
-
-        case LOGOUT_SUCCESS:
-            return {
-                ...state,
-                user: null,
-                isPending: false,
+                user: null
             };
 
         default:

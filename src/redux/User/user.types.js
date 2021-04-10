@@ -1,10 +1,7 @@
 export const SET_USER = 'SET_USER';
 
-export const LOGIN_PENDING = 'LOGIN_PENDING';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN = 'LOGIN';
 
-export const LOGOUT_PENDING = 'LOGOUT_PENDING';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT = 'LOGOUT';
 
-export const SIGNUP_PENDING = 'SIGNUP_PENDING';
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP = 'SIGNUP';
