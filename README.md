@@ -1,4 +1,6 @@
-# Pivony React Internship Task
+# Pivony Demo
+
+Live: https://pivony-project.netlify.app/
 
 Technologies used:
 1. React
